@@ -1,5 +1,18 @@
-from model import Student  # 同目录导入model.py
+# -*- coding: utf-8 -*-
+# ================= 修复导入问题 =================
+import sys
+from pathlib import Path
 
+# 获取当前文件所在目录 (src/lib/lab02)
+current_dir = Path(__file__).parent
+# 获取项目根目录 (src/lib)
+root_dir = current_dir.parent
+# 将根目录添加到系统路径，让Python能找到lab01的文件
+sys.path.append(str(root_dir))
+
+# 现在用绝对路径导入，100%成功，再也不会报错
+from lab01.model import Student
+# =================================================
 class StudentCollection:
     """
     Контейнерный класс для управления коллекцией студентов
