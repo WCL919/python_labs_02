@@ -12,6 +12,7 @@ sys.path.append(str(root_dir))
 
 from lab01.model import Student
 # =================================================
+
 class StudentCollection:
     """
     Контейнерный класс для управления коллекцией студентов
@@ -85,7 +86,23 @@ class StudentCollection:
     def get_students_by_group(self, group: str) -> list[Student]:
         return self.find_by_group(group)
 
-    # 魔法方法：打印集合信息
+
+    # 实验5 新增方法（策略模式 + 高阶函数）
+
+    # 1. 根据传入的排序函数进行排序
+    def sort_by(self, key_func, reverse=False):
+        self._items.sort(key=key_func, reverse=reverse)
+
+    # 2. 根据传入的条件函数过滤学生
+    def filter_by(self, predicate):
+        return [s for s in self._items if predicate(s)]
+
+    # 3. 对所有学生执行传入的函数（map功能）
+    def apply(self, func):
+        return [func(s) for s in self._items]
+    
+    #新增函数结束
+
     def __str__(self):
         return f"StudentCollection(количество студентов: {len(self)})"
 
